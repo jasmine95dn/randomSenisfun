@@ -36,6 +36,7 @@ def create_random_sent(bow):
     start,sent='',[]
     sent.append(random_follower(bow[start]))
 
+    # don't stop creating the sentence until mark of ending found
     while not re.search('[\.\?\!]$', sent[-1]):
         sent.append(random_follower(bow[sent[-1]]))
 
@@ -47,7 +48,7 @@ def main():
     
     vocab = create_vocab(s)
 
-    stdout.write('What to do next? Only break when command is break, else process\n')
+    stdout.write('What to do next? Only break when command is \'break\', else process\n')
     command = input()
     while command.lower() != 'break':
         if not re.search('say(.)*something',command.lower()):
@@ -61,7 +62,7 @@ def main():
             stdout.write('%s\n'%followers)
             stdout.write('pick a random member: %s\n'%random_follower(followers))
 
-            stdout.write('What to do next?\n')
+            stdout.write('What to do next? Want to see a sentence? Then say something\n')
             command= input()
             
         else:
